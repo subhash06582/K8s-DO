@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kplabs-updates
+  name: kplabs-updates
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kplabs-updates
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kplabs-updates
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
+
+# kubectl scale deployment kplabs-updates --replicas=2 
+# kubectl set image deployment kplabs-deployment nginx=nginx2:alpine --record
+# kubectl rollout history deployment kplabs-updates 
+# kubectl rollout undo deployment kplabs-updates 

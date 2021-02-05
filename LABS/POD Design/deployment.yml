@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kplabs-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: php-redis
+        image: nginx:1.17.3
+
+#kubectl rollout history  deployment kplabs-deployment --revision 2
+#kubectl rollout status  deployment kplabs-deployment 
+#kubectl rollout undo deployment kplabs-deployment  --to-revision=1
+# kubectl edit deployment kplabs-deployment 
+# kubectl set image deployment kplabs-deployment php-redis=nginx:alpine --record
+
+# kubectl explain Deployment.spec.strategy.rollingUpdate
+
+# Set Image
+# kubectl set image deployment nginx-deployment nginx=nginx:1.19 --record
+
+# Scale deployment
+# kubectl scale deployment nginx-deployment --replicas=10
+
+# Rollout Undo
+# kubectl rollout undo deployment nginx-deployment 
+
