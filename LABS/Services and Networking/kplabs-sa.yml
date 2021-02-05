@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: kplabs-sa
+  name: kplabs-sa
+spec:
+  containers:
+  - image: nginx
+    name: kplabs-sa
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  serviceAccountName: kplabs
+status: {}
+
+# kubectl create sa kplabs
+# kubectl run kplabs-sa --image=nginx --serviceaccount=kplabs --dry-run=client -o yaml
+# kubectl apply -f kplabs-sa.yml
+# kubectl exec -it kplabs-sa -- sh
+# ls -l
+# cd run
+# cd secrets
+# cd kubernetes.io
+# cd serviceaccount
+# cat token

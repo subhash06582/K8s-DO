@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: kplabs-namespace
+  name: kplabs-namespace
+  namespace: kplabs
+spec:
+  containers:
+  - image: redis
+    name: kplabs-namespace
+    ports:
+    - containerPort: 6379
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+# kubectl create ns kplabs
+# kubectl run kplabs-namespace --image=redis --port=6379 -n kplabs --dry-run=client -o yaml

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kplabs-service
+  name: kplabs-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kplabs-service
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: kplabs-service
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kplabs-service
+  name: kplabs-service
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+    nodePort: 32001
+  selector:
+    app: kplabs-service
+  type: NodePort
+status:
+  loadBalancer: {}
+
+# kubectl create deployment kplabs-service --replicas=3 --image=nginx --dry-run=client -o yaml
+
+# kubectl apply -f kplabs-service.yaml
+
+# kubectl expose deployment kplabs-service --port 8080 --target-port 80 --type NodePort --dry-run=client -o yaml
+
