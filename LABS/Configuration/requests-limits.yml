@@ -1,0 +1,15 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: kplabs-pod
+spec:
+  containers:
+  - name: kplabs-container
+    image: nginx
+    resources:
+      requests:
+        memory: "12Mi"
+        cpu: "0.0005"
+      limits:
+        memory: "64Mi"
+        cpu: "0.001"
