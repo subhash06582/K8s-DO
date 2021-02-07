@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-logging
+spec:
+  containers:
+  - name: ping-contaier-domains
+    image: busybox
+    command: ["ping"]
+    args: ["google.com"]
+  - name: ping-contaier-ip
+    image: busybox
+    command: ["ping"]
+    args: ["8.8.8.8"]
