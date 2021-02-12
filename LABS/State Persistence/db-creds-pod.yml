@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-pod
+spec:
+  containers:
+  - image: nginx
+    name: db-creds-pod
+    env:
+    - name: DB_USER
+      valueFrom:
+        secretKeyRef:
+          name: db-creds
+          key: user
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: db-creds
+          key: pass
+  

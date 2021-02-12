@@ -1,0 +1,23 @@
+# kubectl run app-pod --image=nginx --dry-run=client -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: app-pod
+  name: app-pod
+spec:
+  volumes:
+  - name: myvolume
+    secret:
+      secretName: app-creds
+  containers:
+  - image: nginx
+    name: app-pod
+    volumeMounts:
+    - name: myvolume
+      mountPath: /etc/secret
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

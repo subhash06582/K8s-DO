@@ -1,0 +1,9 @@
+# kubectl create configmap [NAME] [DATA-SOURCE]
+# kubectl create configmap dev-config --from-literal=app.mem=2048m --dry-run=client -o yaml
+apiVersion: v1
+data:
+  app.mem: 2048m
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: dev-config

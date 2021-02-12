@@ -1,0 +1,9 @@
+# kubectl create secret generic app-creds --from-literal=appuser=dbreadonly --from-literal=apppass=myDBPassword#% --dry-run=client -o yaml
+apiVersion: v1
+data:
+  apppass: bXlEQlBhc3N3b3JkIyU=
+  appuser: ZGJyZWFkb25seQ==
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: app-creds
