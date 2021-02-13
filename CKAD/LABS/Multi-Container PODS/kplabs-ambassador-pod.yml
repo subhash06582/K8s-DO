@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kplabs-ambassador-pod
+spec:
+  containers:
+  - name: first-container
+    image: mykplabs/kubernetes:nginx
+  - name: haproxy-container
+    image: haproxy:1.7
+    ports:
+       - containerPort: 80
+    volumeMounts:
+     - name: config-volume
+       mountPath: /usr/local/etc/haproxy/haproxy.cfg
+  volumes:
+    - name: config-volume
+      configMap:
+        name: kplabs-ambassador-config

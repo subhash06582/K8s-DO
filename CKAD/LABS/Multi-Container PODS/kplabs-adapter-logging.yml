@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kplabs-adapter-logging
+spec:
+  volumes:
+  - name: log-volume
+    emptyDir: {}
+  - name: config-volume
+    configMap:
+      name: fluentd-config
+  containers:
+  - name: second-container
+    image: k8s.gcr.io/fluentd-gcp:1.30
+    env:
+    - name: FLUENTD_ARGS
+      value: "-c /etc/fluentd-config/fluentd.conf"
+    volumeMounts:
+    - mountPath: /var/log
+      name: log-volume
+    - name: config-volume
+      mountPath: /etc/fluentd-config 
+  - name: first-container
+    image: busybox
+    volumeMounts:
+    - mountPath: /var/log
+      name: log-volume
+    args:
+    - /bin/sh
+    - -c
+    - >
+      i=0;
+      while true;
+      do
+        echo "$i: $(date)" >> /var/log/1.log;
+        echo "$(date) INFO $i" >> /var/log/2.log;
+        i=$((i+1));
+        sleep 1;
+      done
+
+
+# kubectl create configmap fluentd-config --from-file=fluentd.conf
+# kubectl apply -f kplabs-adapter-logging.yml
+# kubectl exec -it kplabs-adapter-logging --  bash
