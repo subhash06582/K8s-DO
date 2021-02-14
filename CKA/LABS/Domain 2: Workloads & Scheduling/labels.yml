@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: nginxwebserver
+  labels:
+    env: prod
+    app: nginx
+spec:
+  containers:
+  - name: democontainer
+    image: nginx
+
+# kubectl get pods --show-labels
+# kubectl get pods -l env=prod
+# kubectl get pods -l env!=prod
+# kubectl label pod [POD-NAME] env=dev

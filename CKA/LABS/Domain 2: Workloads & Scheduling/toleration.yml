@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kplabs-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx
+      tolerations:
+      - key : "key"
+        operator: "Exists"
+        effect: "NoSchedule"
+
+
+# If a taint with that key and effect already exists, its value is replaced as specified.
+# kubectl taint nodes foo dedicated=special-user:NoSchedule
+# Remove a Taint
+# kubectl taint nodes foo dedicated=special-user:NoSchedule-

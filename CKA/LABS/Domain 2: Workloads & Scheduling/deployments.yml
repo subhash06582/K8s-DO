@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kplabs-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: php-redis
+        image: nginx:1.17.3
+
+# k rollout status deployment kplabs-deployment
+# k rollout history  deployment kplabs-deployment
+# k rollout history  deployment kplabs-deployment --revision=1
+# k rollout undo  deployment kplabs-deployment --to-revision=1
