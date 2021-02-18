@@ -1,0 +1,14 @@
+# k run -it pod01 --image=busybox
+# k run -it pod02 --image=busybox
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: test-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: pod01
+  policyTypes:
+    - Ingress
+    - Egress
