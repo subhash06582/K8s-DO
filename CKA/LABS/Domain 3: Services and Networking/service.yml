@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kplabs-service
+spec:
+  ports:
+  - port: 8080
+    targetPort: 80
+
+# k create deployment nginx --image=nginx --port=80 --replicas=2
+
+# k run -it ubuntu --image=ubuntu 
+# apt-get update & apt-get install curl -y
